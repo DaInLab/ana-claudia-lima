@@ -96,3 +96,4 @@ hist(df.ex1$tx.juros)
 lines(df.ex1$tx.juros)
 
 stripchart(df.ex1$tx.juros, vertical = T)
+

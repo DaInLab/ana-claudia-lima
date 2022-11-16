@@ -7,47 +7,57 @@ library(readxl)
 # Importando o arquivo do exercício 2
 df.ex2 <- read_excel("./dados/exercicio2.xls",skip = 1, col_names = "Casas", col_types = c("numeric"))
 df.ex2
+class(df.ex2)
+dim(df.ex2)
+
+# a) Construindo uma tabela de frequências
+table(df.ex2)
+
+# b) Calculando as medidas de posição e as medidas de dispersão
 
 # calculando a media
-ex1.media <- mean(df.ex1$tx.juros)
-print(paste("Média das taxas de juros:", ex1.media))
+ex2.media <- mean(df.ex2$Casas)
+print(paste("Média das Casas:", ex2.media))
 
 # calculando a mediana
-ex1.mediana = median(df.ex1$tx.juros)
-print(paste("Médiana das taxas de juros:", ex1.mediana))
+ex2.mediana = median(df.ex2$Casas)
+print(paste("Médiana das Casas:", ex2.mediana))
 
 # calculando o desvio padrão
-ex1_desviop = round(sd(df.ex1$tx.juros),6)
-print(paste("Desvio Padrão das taxas de juros:", ex1_desviop))
+ex2_desviop = round(sd(df.ex2$Casas),6)
+print(paste("Desvio Padrão das Casas:", ex2_desviop))
 
 # calculando a variância
-ex1_varianca <- round(var(df.ex1$tx.juros),6)
-print(paste("Variância das taxas de juros:", ex1_varianca))
+ex2_varianca <- round(var(df.ex2$Casas),6)
+print(paste("Variância das Casas:", ex2_varianca))
+var (df.ex2)
 
 # valor mínimo
-ex1.minimo <- min(df.ex1$tx.juros)
-print(paste("Valor mínimo das taxas de juros:", ex1.minimo))
+ex2.minimo <- min(df.ex2$Casas)
+print(paste("Valor mínimo das  Casas:", ex2.minimo))
 
 # valor máximo
-ex1.maximo <- max(df.ex1$tx.juros)
-print(paste("Valor máximo das taxas de juros:", ex1.maximo))
+ex2.maximo <- max(df.ex2$Casas)
+print(paste("Valor máximo das Casas:", ex2.maximo))
 
 # calculando os quartis
-ex1.quartis <- round(quantile(df.ex1$tx.juros),2)
-q1 <- ex1.quartis[2]
+ex2.quartis <- round(quantile(df.ex2$Casas),2)
+q1 <- ex2.quartis[2]
 print(paste("Q1:", q1))
 
-q3 <- ex1.quartis[4]
+q3 <- ex2.quartis[4]
 print(paste("Q3:", q3))
 
+summary (df.ex2)
+
 # O melhor gráfico para representar os valores é o do "boxplot"!
-boxplot(df.ex1)
+boxplot(df.ex2)
 
 # Uma versão mais "sofisticada"!
-boxplot(df.ex1$tx.juros,
-        main = "Taxas de Juros Recebidas em Ações",
-        xlab = "Taxas de Juros",
-        ylab = "Ações",
+boxplot(df.ex2$Casas,
+        main = "Casas",
+        xlab = "Casas",
+        ylab = "Quarteirões",
         col = "orange",
         border = "brown",
         horizontal = TRUE,
@@ -56,25 +66,25 @@ boxplot(df.ex1$tx.juros,
 
 # Uma versão dois, com retas indicando os pontos no gráfico
 # get quartile in r code (single line)
-media = round(mean(df.ex1$tx.juros),2)
+media = round(mean(df.ex2$Casas),2)
 print(media)
-mediana = round(median(df.ex1$tx.juros),2)
+mediana = round(median(df.ex2$Casas),2)
 print(mediana)
-menorv = round(min(df.ex1$tx.juros),2)
+menorv = round(min(df.ex2$Casas),2)
 print(menorv)
-maiorv = round(max(df.ex1$tx.juros),2)
+maiorv = round(max(df.ex2$Casas),2)
 print(maiorv)
 
-quartiz = round(quantile(df.ex1$tx.juros, prob=c(.25,.5,.75)),2)
+quartiz = round(quantile(df.ex2$Casas, prob=c(.25,.5,.75)),2)
 quartiz
 # 25%  50%  75% 
 #2.59 2.61 2.63 
 
-round(summary(df.ex1$tx.juros),2)
+round(summary(df.ex2$Casas),2)
 #Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #2.50    2.59    2.61    2.60    2.63    2.64 
 
-boxplot(df.ex1$tx.juros)
+boxplot(df.ex2$Casas)
 
 abline(a = media, b = 0L, h = NULL, v = T)
 abline(a = mediana, b = 0L, h = NULL, v = T)
@@ -84,17 +94,5 @@ abline(a = quartiz[1], b = 0L, h = NULL, v = T)
 abline(a = quartiz[3], b = 0L, h = NULL, v = T)
 
 
-# Experiências ....
 
-#Outro gráfico
-plot(df.ex1$tx.juros, main = "Taxas de Juros Recebidas em Ações",
-     xlab = "Número da Ação",
-     ylab = "Taxa de Juros")
-barplot(table(df.ex1$tx.juros))
-
-plot(df.ex1$tx.juros)
-hist(df.ex1$tx.juros)
-lines(df.ex1$tx.juros)
-
-stripchart(df.ex1$tx.juros, vertical = T)
 
