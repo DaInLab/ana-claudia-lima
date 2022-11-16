@@ -4,9 +4,10 @@ if (!("readxl") %in% installed.packages()) install.packages("readxl")
 # Carregando a biblioteca
 library(readxl)
 
-# Importando o arquivo do exercício 1
-df.ex1 <- read_excel("./dados/exercicio1.xls",skip = 1, col_names = "tx.juros", col_types = c("numeric"))
-#view(df.ex1)
+# Importando o arquivo do exercício 2
+df.ex2 <- read_excel("./dados/exercicio2.xls",skip = 1, col_names = "Casas", col_types = c("numeric"))
+df.ex2
+
 # calculando a media
 ex1.media <- mean(df.ex1$tx.juros)
 print(paste("Média das taxas de juros:", ex1.media))
@@ -96,3 +97,4 @@ hist(df.ex1$tx.juros)
 lines(df.ex1$tx.juros)
 
 stripchart(df.ex1$tx.juros, vertical = T)
+
