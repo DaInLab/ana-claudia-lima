@@ -4,18 +4,27 @@ if (!("readxl") %in% installed.packages()) install.packages("readxl")
 # Carregando a biblioteca
 library(readxl)
 
-# Importando o arquivo do exercício 4
+# Considere as informações contidas na tabela. Os dados estão na planilha Excel (exercicio4.xls) acerca dos salários de 20 funcionários de um hospital. Faça uma distribuição de frequências e o gráfico histograma correspondente em R.
+
+# Importando os dados do exercício 4
 df.ex4 <- read_excel("./dados/exercicio4.xls",skip = 1, col_names = "Salários", col_types = c("numeric"))
-#view(df.ex4)
-# calculando a media
-ex4.media <- mean(df.ex4$Salários)
-print(paste("Média dos salários:", ex4.media))
 
-# calculando a mediana
-ex4.mediana = median(df.ex4$Salários)
-print(paste("Médiana dos salários:", ex4.mediana))
+# distribuição de frequência
+# transformando os dados em vetor
+ex4.em.vetor <- c(df.ex4$Salários)
 
-# calculando a frequência
+# criando a tabela de frequência
+ex4.tabela <-table(ex4.em.vetor)
 
-# histograma
+# imprimindo a tabela de frequência
+ex4.tabela
+table(df.ex4)
+
+
+# Histograma
+
+
+
+# O melhor gráfico para representar os valores é o do "boxplot"!
+boxplot(df.ex4)
 

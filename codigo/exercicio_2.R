@@ -4,13 +4,21 @@ if (!("readxl") %in% installed.packages()) install.packages("readxl")
 # Carregando a biblioteca
 library(readxl)
 
-# Importando o arquivo do exercício 2
+# Importando dados do exercício 2
 df.ex2 <- read_excel("./dados/exercicio2.xls",skip = 1, col_names = "Casas", col_types = c("numeric"))
 df.ex2
 class(df.ex2)
 dim(df.ex2)
 
-# a) Construindo uma tabela de frequências
+# a) Construir uma tabela de frequências;
+# transformando os dados em vetor
+ex2.em.vetor <- c(df.ex2$Casas)
+
+# criando a tabela de frequência
+ex2.tabela <-table(ex2.em.vetor)
+
+# imprimindo a tabela de frequência
+ex2.tabela
 table(df.ex2)
 
 # b) Calculando as medidas de posição e as medidas de dispersão
@@ -49,50 +57,5 @@ q3 <- ex2.quartis[4]
 print(paste("Q3:", q3))
 
 summary (df.ex2)
-
-# O melhor gráfico para representar os valores é o do "boxplot"!
-boxplot(df.ex2)
-
-# Uma versão mais "sofisticada"!
-boxplot(df.ex2$Casas,
-        main = "Casas",
-        xlab = "Casas",
-        ylab = "Quarteirões",
-        col = "orange",
-        border = "brown",
-        horizontal = TRUE,
-        notch = T
-)
-
-# Uma versão dois, com retas indicando os pontos no gráfico
-# get quartile in r code (single line)
-media = round(mean(df.ex2$Casas),2)
-print(media)
-mediana = round(median(df.ex2$Casas),2)
-print(mediana)
-menorv = round(min(df.ex2$Casas),2)
-print(menorv)
-maiorv = round(max(df.ex2$Casas),2)
-print(maiorv)
-
-quartiz = round(quantile(df.ex2$Casas, prob=c(.25,.5,.75)),2)
-quartiz
-# 25%  50%  75% 
-#2.59 2.61 2.63 
-
-round(summary(df.ex2$Casas),2)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#2.50    2.59    2.61    2.60    2.63    2.64 
-
-boxplot(df.ex2$Casas)
-
-abline(a = media, b = 0L, h = NULL, v = T)
-abline(a = mediana, b = 0L, h = NULL, v = T)
-abline(a = menorv, b = 0L, h = NULL, v = T)
-abline(a = maiorv, b = 0L, h = NULL, v = T)
-abline(a = quartiz[1], b = 0L, h = NULL, v = T)
-abline(a = quartiz[3], b = 0L, h = NULL, v = T)
-
-
 
 
