@@ -23,8 +23,10 @@ table(df.ex4)
 
 # Histograma
 
+hist(df.ex4$Salários)
+hist(df.ex4$Salários, breaks = 7, col = "blue", xlab = "Salário dos funcionários")
+hist(df.ex4$Salários, breaks = 7, col = "blue", xlab = "Salário dos funcionários", ylab = "Frequência", main = " Histograma de Salários")
 
+hist(df.ex4$Salários, breaks = 7, col = "green", xlab = "Salário dos funcionários", ylab = "Frequência", main = " Histograma de Salários")
 
-# O melhor gráfico para representar os valores é o do "boxplot"!
-boxplot(df.ex4)
 
