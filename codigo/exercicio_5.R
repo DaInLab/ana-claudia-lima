@@ -1,98 +1,72 @@
 # Instalando biblioteca readxl para importar para o R arquivos com extensão .xls ou .xlsx.
 if (!("readxl") %in% installed.packages()) install.packages("readxl")
 
-# Carregando a biblioteca
+# Carregando as bibliotecas
 library(readxl)
+library(tidyverse)
+library (ggplot2)
+
+
 
 # Importando o arquivo do exercício 5
-df.ex5 <- read_excel("./dados/exercicio5.xls",skip = 1, col_names = "tx.juros", col_types = c("numeric"))
-#view(df.ex1)
-# calculando a media
-ex1.media <- mean(df.ex1$tx.juros)
-print(paste("Média das taxas de juros:", ex1.media))
-
-# calculando a mediana
-ex1.mediana = median(df.ex1$tx.juros)
-print(paste("Médiana das taxas de juros:", ex1.mediana))
-
-# calculando o desvio padrão
-ex1_desviop = round(sd(df.ex1$tx.juros),6)
-print(paste("Desvio Padrão das taxas de juros:", ex1_desviop))
-
-# calculando a variância
-ex1_varianca <- round(var(df.ex1$tx.juros),6)
-print(paste("Variância das taxas de juros:", ex1_varianca))
-
-# valor mínimo
-ex1.minimo <- min(df.ex1$tx.juros)
-print(paste("Valor mínimo das taxas de juros:", ex1.minimo))
-
-# valor máximo
-ex1.maximo <- max(df.ex1$tx.juros)
-print(paste("Valor máximo das taxas de juros:", ex1.maximo))
-
-# calculando os quartis
-ex1.quartis <- round(quantile(df.ex1$tx.juros),2)
-q1 <- ex1.quartis[2]
-print(paste("Q1:", q1))
-
-q3 <- ex1.quartis[4]
-print(paste("Q3:", q3))
-
-# O melhor gráfico para representar os valores é o do "boxplot"!
-boxplot(df.ex1)
-
-# Uma versão mais "sofisticada"!
-boxplot(df.ex1$tx.juros,
-        main = "Taxas de Juros Recebidas em Ações",
-        xlab = "Taxas de Juros",
-        ylab = "Ações",
-        col = "orange",
-        border = "brown",
-        horizontal = TRUE,
-        notch = T
-)
-
-# Uma versão dois, com retas indicando os pontos no gráfico
-# get quartile in r code (single line)
-media = round(mean(df.ex1$tx.juros),2)
-print(media)
-mediana = round(median(df.ex1$tx.juros),2)
-print(mediana)
-menorv = round(min(df.ex1$tx.juros),2)
-print(menorv)
-maiorv = round(max(df.ex1$tx.juros),2)
-print(maiorv)
-
-quartiz = round(quantile(df.ex1$tx.juros, prob=c(.25,.5,.75)),2)
-quartiz
-# 25%  50%  75% 
-#2.59 2.61 2.63 
-
-round(summary(df.ex1$tx.juros),2)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#2.50    2.59    2.61    2.60    2.63    2.64 
-
-boxplot(df.ex1$tx.juros)
-
-abline(a = media, b = 0L, h = NULL, v = T)
-abline(a = mediana, b = 0L, h = NULL, v = T)
-abline(a = menorv, b = 0L, h = NULL, v = T)
-abline(a = maiorv, b = 0L, h = NULL, v = T)
-abline(a = quartiz[1], b = 0L, h = NULL, v = T)
-abline(a = quartiz[3], b = 0L, h = NULL, v = T)
+dataframe.ex5 <- read_excel("./dados/exercicio5.xls",skip = 1, col_names = c("Marcas", "N_pessoas"), col_types = c("text", "numeric"))
+#view(df.ex5)
 
 
-# Experiências ....
+# transformando os dados em vetor
+ex5.em.vetor <- c (dataframe.ex5$Marcas)
 
-#Outro gráfico
-plot(df.ex1$tx.juros, main = "Taxas de Juros Recebidas em Ações",
-     xlab = "Número da Ação",
-     ylab = "Taxa de Juros")
-barplot(table(df.ex1$tx.juros))
+# criando um gráfico
+ggplot(dataframe.ex5) +
+  geom_point(mapping=aes(x=Marcas,y= N_pessoas))
 
-plot(df.ex1$tx.juros)
-hist(df.ex1$tx.juros)
-lines(df.ex1$tx.juros)
+ggplot(dataframe.ex5)+
+  geom_bar (mapping = aes(x= Marcas, Y= N_pessoas, fill=Marcas))
+ 
 
-stripchart(df.ex1$tx.juros, vertical = T)
+geom_bar (mapping = aes(x= Marcas, Y= N_pessoas, fill=Marcas))+
+  facet_grid(Marcas~N_pessoas)
+
+
+
+#Criando os vetores com duas variáveis: Marcas e Nºpessoas
+Marcas<-c("A","B","C","D","E")
+Marcas
+Nºpessoas<-c(45,32,23,15,9)
+Nºpessoas
+# Construir uma tabela
+exercicio5<-data.frame(Marcas,Nºpessoas)
+
+
+
+par (mgp-c(1,1,0))
+png (filename = )
+
+# criando a tabela de frequência
+ex5.tabela <-table(ex5.em.vetor)
+
+# imprimindo a tabela de frequência
+ex5.tabela
+table(ex5.tabela)
+
+
+# Histograma
+
+hist(df.ex4$Salários)
+hist(df.ex4$Salários, breaks = 7, col = "blue", xlab = "Salário dos funcionários")
+hist(df.ex4$Salários, breaks = 7, col = "blue", xlab = "Salário dos funcionários", ylab = "Frequência", main = " Histograma de Salários")
+
+hist(df.ex4$Salários, breaks = 7, col = "green", xlab = "Salário dos funcionários", ylab = "Frequência", main = " Histograma de Salários")
+
+
+
+# Construir um gráfico
+
+ggplot(x = Marcas, y = N_pessoas) + geom_bar(stat = "identity")
+
+barplot (Marcas, xlab = "Marcas", ylab = "Número de pessoas", main = "Pesquisa de Marcas Preferidas")
+
+
+barplot (dataframe.ex5)
+
+barplot (height = Marcas)
