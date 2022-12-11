@@ -58,4 +58,62 @@ print(paste("Q3:", q3))
 
 summary (df.ex2)
 
+# O melhor gráfico para representar os valores é o do "boxplot"!
+boxplot(df.ex2)
+
+# Uma versão mais "sofisticada"!
+boxplot(df.ex2$Casas,
+        main = "Numero de casas por quarteirão",
+        xlab = "Casas",
+        ylab = "Quarteirões",
+        col = "orange",
+        border = "brown",
+        horizontal = TRUE,
+        notch = T
+)
+
+# Uma versão dois, com retas indicando os pontos no gráfico
+# get quartile in r code (single line)
+media = round(mean(df.ex2$Casas),2)
+print(media)
+mediana = round(median(df.ex2$Casas),2)
+print(mediana)
+menorv = round(min(df.ex2$Casas),2)
+print(menorv)
+maiorv = round(max(df.ex2$Casas),2)
+print(maiorv)
+
+quartiz = round(quantile(df.ex2$Casas, prob=c(.25,.5,.75)),2)
+quartiz
+# 25%  50%  75% 
+#2.59 2.61 2.63 
+
+round(summary(df.ex2$Casas),2)
+#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#2.50    2.59    2.61    2.60    2.63    2.64 
+
+boxplot(df.ex2$Casas)
+
+abline(a = media, b = 0L, h = NULL, v = T)
+abline(a = mediana, b = 0L, h = NULL, v = T)
+abline(a = menorv, b = 0L, h = NULL, v = T)
+abline(a = maiorv, b = 0L, h = NULL, v = T)
+abline(a = quartiz[1], b = 0L, h = NULL, v = T)
+abline(a = quartiz[3], b = 0L, h = NULL, v = T)
+
+
+# Experiências ....
+
+#Outro gráfico
+plot(df.ex2$Casas, main = "Número de casas por quarteirão",
+     xlab = "Número da Casas",
+     ylab = "Quarteirão")
+barplot(table(df.ex2$Casas))
+
+plot(df.ex2$Casas)
+hist(df.ex2$Casas)
+lines(df.ex2$Casas)
+
+stripchart(df.ex2$Casas, vertical = T)
+
 
